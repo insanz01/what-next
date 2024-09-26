@@ -9,7 +9,7 @@ let eventData = [
     },
     {
         name: "Lebaran",
-        date: "2024-03-28",
+        date: "2025-03-30",
     },
 ];
 
@@ -18,6 +18,8 @@ let currentIndex = 0;
 const NEXT = "ArrowRight";
 const PREV = "ArrowLeft";
 const NEW_CONSOLE = "IntlBackslash";
+
+const DAY_THEME = "DAY";
 
 const DAY_MILISECOND = 86400000; // 1000 miliseconds * 60 seconds * 60 minutes * 24 hours
 
@@ -85,7 +87,7 @@ class Application {
         if(target === "NIGHT") {
             theme.add("bg-nightmode");
             theme.remove("bg-daymode");
-        } else if(target === "DAY") {
+        } else if(target === DAY_THEME) {
             theme.add("bg-daymode");
             theme.remove("bg-nightmode");
         }
@@ -149,9 +151,9 @@ class Events {
         try {
             const db = new LocalDB("events")
 
-            const currentDate = new Date();
+            const today = new Date();
 
-            const filteredEvent = this.data.filter(res => new Date(res.date) > currentDate);
+            const filteredEvent = this.data.filter(res => new Date(res.date) > today);
 
             this.data = [...filteredEvent];
 
